@@ -1,0 +1,25 @@
+ASSUME CS: CODE, DS: DATA
+
+DATA SEGMENT
+    LIST DB 02H, 02H
+    COUNT EQU 0001H
+DATA ENDS
+
+CODE SEGMENT
+START:  MOV AX, DATA
+        MOV DS, AX
+        MOV AX, 0000H
+        MOV CX, COUNT
+        MOV SI, OFFSET LIST
+        MOV AL, [SI]
+NEXT:   ADD AL, [SI+1]
+        INC SI
+        DEC CX
+        JNZ NEXT
+        MOV CL, 02H
+        DIV CL
+        INT 03H
+CODE ENDS
+END START
+
+
