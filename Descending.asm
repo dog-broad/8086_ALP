@@ -11,16 +11,16 @@ START:	MOV AX, DATA
 		MOV DX, COUNT
 AGAIN:	MOV CX, DX
         MOV SI, OFFSET LIST
-BACK:	MOV AL, [SI]
-		CMP AL, [SI+1]
-		JG NEXT   
-		XCHG AL, [SI+1]
-		XCHG AL, [SI]
-NEXT:	INC SI               
-		LOOP BACK
-		DEC DX
-		JNZ AGAIN
-		INT 03
+BACK:	MOV AL, [SI]          ; move the first number in the list to AL
+		CMP AL, [SI+1]        ; compare the first number to the second number
+		JG NEXT               ; if the first number is greater than the second number, then go to NEXT
+		XCHG AL, [SI+1]       ; if the first number is not greater than the second number, then exchange the first number with the second number
+		XCHG AL, [SI]         ; exchange the first number with the second number
+NEXT:	INC SI                 ; move to the next number in the list
+		LOOP BACK             ; repeat the loop until CX = 0
+		DEC DX                ; move to the next number in the list
+		JNZ AGAIN             ; repeat the loop until DX = 0
+		INT 03                ; end the program
 CODE ENDS
 END START
 
